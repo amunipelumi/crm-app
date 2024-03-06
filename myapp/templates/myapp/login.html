@@ -1,0 +1,56 @@
+
+{% extends 'myapp/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <body>
+
+        <div class="container bg-light shadow-md p-3 form-layout">
+
+            <br>
+
+            <h3 class="my-layout">Login to your account</h3>
+
+            <hr class="hr-hide"><hr><hr class="hr-hide">
+
+            <h6>Please fill in the required details.</h6>
+
+            <hr class="hr-hide">
+
+            <form action="" autocomplete="off" method="POST">
+
+                {% csrf_token %}
+
+                {{form.username|as_crispy_field}}
+
+                <br>
+
+                {{form.password|as_crispy_field}}
+
+                <br><br>
+
+                <button type="submit" class="btn btn-primary w-100 btn-block p-2">
+                    
+                    Login &nbsp; <i class="fa fa-key" aria-hidden="true"></i>
+                
+                </button>
+
+            </form>
+
+            <br>
+
+            <div class="text-center">
+
+                <p>Don't have an account?</p>
+
+                <a href="{% url 'register' %}">Register</a>
+
+            </div>
+
+        </div>
+
+    </body>
+
+{% endblock %}

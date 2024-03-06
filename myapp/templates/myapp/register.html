@@ -1,0 +1,64 @@
+
+{% extends 'myapp/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <body>
+
+        <div class="container bg-light shadow-md p-3 form-layout">
+
+            <br>
+
+            <h3 class="my-layout">Create a new account</h3>
+
+            <hr class="hr-hide">
+
+            <h6 class="my-layout">Kickstart your journey to effective record keeping with AkSpot.</h6>
+
+            <hr><hr class="hr-hide">
+
+            <h6>Please fill in the required details.</h6>
+
+            <hr class="hr-hide">
+
+            <form action="" autocomplete="off" method="POST">
+
+                {% csrf_token %}
+
+                {{form.username|as_crispy_field}} 
+
+                <br>
+
+                {{form.password1|as_crispy_field}}
+
+                <br>
+
+                {{form.password2|as_crispy_field}}
+
+                <br><br>
+
+                <button type="submit" class="btn btn-primary w-100 btn-block p-2">
+                    
+                    Create account &nbsp; &nbsp; <i class="fa fa-user-plus" aria-hidden="true"></i>
+                
+                </button>
+
+            </form>
+
+            <br>
+
+            <div class="text-center">
+
+                <p>Already have an account?</p>
+
+                <a href="{% url 'login' %}">Login</a>
+
+            </div>
+
+        </div>
+
+    </body> 
+
+{% endblock %}

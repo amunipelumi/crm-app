@@ -1,0 +1,22 @@
+
+.form-layout {
+    border-radius: 15px;
+    width: 500px;
+}
+
+.my-layout {
+    text-align: center;
+}
+
+.hr-hide {
+    clear: both;
+    visibility: hidden;
+}
+
+.message-text {
+    color: white;
+}
+
+.n-center {
+    left: 25%;
+}

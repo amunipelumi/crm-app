@@ -1,0 +1,33 @@
+
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+<body>
+
+    <br>
+    <br>
+
+    <div class="text-center">
+
+        <h3>AkSpot CRM</h3>
+
+        <br>
+
+        <h5>Keep track of your records with topnotch security</h5>
+
+        <hr class="hr-hide">
+
+        <br>
+
+        <a class="btn btn-primary" type="button" href="{% url 'register' %}">
+            
+            Create your account &nbsp; <i class="fa fa-plus" aria-hidden="true"></i>
+        
+        </a>
+
+    </div>
+
+</body>
+
+{% endblock %}
