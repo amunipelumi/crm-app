@@ -39,7 +39,33 @@
 
         <tbody>
 
-            {% if records %}
+            {% if record %}
+
+                <tr>
+
+                    <td>{{record.first_name}} {{record.last_name}}</td>
+                    <td>{{record.email}}</td>
+                    <td>{{record.phone}}</td>
+                    <td>{{record.address}}</td>
+                    <td>{{record.city}}</td>
+                    <td>{{record.province}}</td>
+                    <td>{{record.country}}</td>
+                    <td>{{record.created_at}}</td>
+                    <td>{{record.updated_at}}</td>
+
+                    <td>
+                        
+                        <a href="{% url 'view-record' record.id %}" class="btn btn-success btn-sm">
+                            
+                            <i class="fa fa-address-book" aria-hidden="true"></i>
+                        
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% elif records %}
 
                 {% for record in records %}
 
@@ -68,7 +94,13 @@
                     </tr>
 
                 {% endfor %}
+            
+            {% else %}
+                    
+                <h4>You have no records</h4>
 
+                <br>
+                    
             {% endif %}
 
         </tbody>

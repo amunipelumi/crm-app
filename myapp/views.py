@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
@@ -58,10 +58,21 @@ def login(request):
 # dashboard
 @login_required(login_url='login')
 def dashboard(request):
-    records = Record.objects.all()
 
-    context = {'records':records}
-    return render(request, 'myapp/dashboard.html', context)
+    try:
+        records = Record.objects.filter(owner_id=request.user)
+        
+        if records.count() < 2:
+            record = records.first()
+            context = {'record':record}
+        
+        else:
+            context = {'records':records}
+
+        return render(request, 'myapp/dashboard.html', context)
+        
+    except Record.DoesNotExist:
+        return render(request, 'myapp/dashboard.html')
 
 
 # create record
@@ -73,7 +84,10 @@ def create_record(request):
         form = AddRecordForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            f = form.save(commit=False)
+
+            f.owner = request.user
+            f.save() 
 
             messages.success(request, 'Record added!')
             return redirect('dashboard')
@@ -86,7 +100,7 @@ def create_record(request):
 @login_required(login_url='login')
 def view_record(request, pk):
 
-    record = Record.objects.get(id=pk)
+    record = get_object_or_404(Record, id=pk, owner_id=request.user) 
     context = {'record':record}
 
     return render(request, 'myapp/view-record.html', context) 
@@ -96,7 +110,7 @@ def view_record(request, pk):
 @login_required(login_url='login')
 def update_record(request, pk):
 
-    record = Record.objects.get(id=pk)
+    record = Record.objects.get(id=pk, owner_id=request.user)
     form = UpdateRecordForm(instance=record) 
 
     if request.method == 'POST':
@@ -104,6 +118,8 @@ def update_record(request, pk):
 
         if form.is_valid():
             form.save()
+
+        # else: print(form.errors)
 
             messages.success(request, 'Record updated!')
             return redirect('dashboard')
@@ -116,7 +132,7 @@ def update_record(request, pk):
 @login_required(login_url='login')
 def delete_record(request, pk):
 
-    record = Record.objects.get(id=pk)
+    record = Record.objects.get(id=pk, owner_id=request.user)
     record.delete()
     
     messages.success(request, 'Record deleted!')
@@ -127,5 +143,5 @@ def delete_record(request, pk):
 def logout(request):
     auth.logout(request)
 
-    messages.info(request, 'You logged out of your account!')
+    messages.info(request, 'Account logged out!')
     return redirect('login')

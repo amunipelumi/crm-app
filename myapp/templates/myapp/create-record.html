@@ -5,74 +5,78 @@
 
 {% block content %}
 
-    <body>
+    {% if user.is_authenticated %}
 
-        <div class="container bg-light shadow-md p-3 form-layout">
+        <body>
 
-            <h3 class="my-layout">Create a new record</h3>
+            <div class="container bg-light shadow-md p-3 form-layout">
 
-            <hr>
+                <h3 class="my-layout">Create a new record</h3>
 
-            <h6>Please fill in the required details.</h6>
+                <hr>
 
-            <hr class="hr-hide">
+                <h6>Please fill in the required details.</h6>
 
-            <form action="" autocomplete="off" method="POST">
+                <hr class="hr-hide">
 
-                {% csrf_token %}
+                <form action="" autocomplete="off" method="POST">
 
-                {{form.first_name|as_crispy_field}}
+                    {% csrf_token %}
+
+                    {{form.first_name|as_crispy_field}}
+
+                    <br>
+
+                    {{form.last_name|as_crispy_field}}
+
+                    <br>
+
+                    {{form.email|as_crispy_field}}
+
+                    <br>
+
+                    {{form.phone|as_crispy_field}}
+
+                    <br>
+
+                    {{form.address|as_crispy_field}}
+
+                    <br>
+
+                    {{form.city|as_crispy_field}}
+
+                    <br>
+
+                    {{form.province|as_crispy_field}}
+
+                    <br>
+                    
+                    {{form.country|as_crispy_field}}
+
+                    <br><br>
+
+                    <button type="submit" class="btn btn-primary w-100 btn-block p-2">
+                        
+                        Create new record &nbsp; <i class="fa fa-plus" aria-hidden="true"></i>
+                    
+                    </button>
+
+                </form>
 
                 <br>
 
-                {{form.last_name|as_crispy_field}}
+                <a href="{% url 'dashboard' %}" class="btn btn-primary w-100 btn-block p-2">
 
-                <br>
+                    Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i>
 
-                {{form.email|as_crispy_field}}
-
-                <br>
-
-                {{form.phone|as_crispy_field}}
-
-                <br>
-
-                {{form.address|as_crispy_field}}
-
-                <br>
-
-                {{form.city|as_crispy_field}}
-
-                <br>
-
-                {{form.province|as_crispy_field}}
-
-                <br>
-                
-                {{form.country|as_crispy_field}}
+                </a>
 
                 <br><br>
 
-                <button type="submit" class="btn btn-primary w-100 btn-block p-2">
-                    
-                    Create new record &nbsp; <i class="fa fa-plus" aria-hidden="true"></i>
-                
-                </button>
+            </div>
 
-            </form>
+        </body>
 
-            <br>
-
-            <a href="{% url 'dashboard' %}" class="btn btn-primary w-100 btn-block p-2">
-
-                Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i>
-
-            </a>
-
-            <br><br>
-
-        </div>
-
-    </body>
+    {% endif %}
 
 {% endblock %} 
