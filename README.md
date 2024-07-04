@@ -1,2 +1,2 @@
 # CRM App
-Basic CRM application for creating, reading, updating and deleting records (CRUD).
+Basic customer relationship management (CRM) application for creating, reading, updating and deleting records (CRUD).
