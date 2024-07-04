@@ -1,2 +1,2 @@
-# crm-app
+# CRM App
 Basic CRM application for creating, reading, updating and deleting records (CRUD).
